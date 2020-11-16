@@ -1,0 +1,17 @@
+<h1>New game !</h1>
+
+<% @grid = [] %>
+<% chars = ("A".."Z").to_a %>
+<% 12.times do %>
+  <% @grid <<  chars.sample(1) %>
+<% end %>
+<% @grid = @grid.flatten %>
+<%= @grid %>
+
+<form action="score" method="post">
+  <input name ="word" type="text" placeholder="your word !">
+  <input name="grid" type="hidden" value="<%= @grid %>" >
+  <input type="submit">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+</form>
+
