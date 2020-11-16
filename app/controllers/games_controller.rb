@@ -7,6 +7,7 @@ class GamesController < ApplicationController
 
   def score
     @display_res = display_result
+    @score
   end
 
   def matching_letters(attempt, grid)
@@ -26,9 +27,11 @@ class GamesController < ApplicationController
   def display_result
     @matching = matching_letters(params[:word], params[:grid])
     @english = english_word?(params[:word])
+    @score = 0
 
     if @matching && @english
-      "Congratulations, the word is valid and was present"
+      @score = params[:word].size
+      "Congratulations, #{params[:word]} is valid !"
     elsif @matching && @english == false
       "Sorry but #{params[:word]} isn't an english word"
     else
